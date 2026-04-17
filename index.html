@@ -6,67 +6,91 @@
     <title>AI Setup Sprint — Get One Real AI System Working Fast</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root { --primary: #1a1a2e; --secondary: #16213e; --accent: #e94560; --light: #f8f9fa; --white: #ffffff; --text: #333333; }
+        :root { --primary: #1a1a2e; --secondary: #16213e; --text: #333333; --text-light: #666666; --light: #f5f5f7; --white: #ffffff; }
         html { scroll-behavior: smooth; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.8; color: var(--text); background: var(--white); font-size: 18px; }
-        section { padding: 120px 20px; position: relative; }
-        .container { max-width: 740px; margin: 0 auto; }
-        .hero { background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); color: var(--white); text-align: center; padding: 140px 20px 120px; }
-        .hero h1 { font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 900; line-height: 1.15; margin-bottom: 30px; letter-spacing: -1px; }
-        .hero .pattern-interrupt { display: block; color: var(--accent); font-size: 1.1em; margin-bottom: 15px; }
-        .hero-subtitle { font-size: 1.4rem; margin-bottom: 25px; opacity: 0.9; line-height: 1.5; }
-        .hero-outcome { font-size: 1.2rem; margin-bottom: 50px; opacity: 0.85; }
-        .cta-button { display: inline-block; background: var(--accent); color: var(--white); padding: 22px 60px; font-size: 1.2rem; font-weight: 700; text-decoration: none; border-radius: 50px; transition: all 0.3s; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 10px 30px rgba(233, 69, 96, 0.3); }
-        .cta-button:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(233, 69, 96, 0.4); }
-        .micro-reassurance { margin-top: 25px; font-size: 0.95rem; opacity: 0.7; }
-        .light-section { background: var(--white); }
-        .gray-section { background: var(--light); }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.7; color: var(--text); background: var(--light); font-size: 17px; }
+        section { padding: 80px 20px; }
+        .container { max-width: 720px; margin: 0 auto; }
+        
+        /* HERO - Dark */
+        .hero { background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); color: var(--white); text-align: center; padding: 100px 20px 80px; }
+        .hero h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; line-height: 1.2; margin-bottom: 20px; }
+        .hero-subtitle { font-size: 1.25rem; margin-bottom: 15px; opacity: 0.9; }
+        .hero-outcome { font-size: 1.1rem; margin-bottom: 35px; opacity: 0.8; }
+        .cta-button { display: inline-block; background: var(--white); color: var(--primary); padding: 16px 40px; font-size: 1rem; font-weight: 700; text-decoration: none; border-radius: 6px; transition: all 0.2s; }
+        .cta-button:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(0,0,0,0.2); }
+        .micro-reassurance { margin-top: 20px; font-size: 0.9rem; opacity: 0.7; }
+        
+        /* CONTENT SECTIONS - Light Gray */
+        .content-section { background: var(--light); }
+        
+        /* ALTERNATING - White */
+        .alt-section { background: var(--white); }
+        
+        /* DARK SECTIONS */
         .dark-section { background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); color: var(--white); }
-        .accent-section { background: var(--accent); color: var(--white); }
-        h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; margin-bottom: 50px; line-height: 1.3; color: var(--primary); }
-        .dark-section h2, .accent-section h2 { color: var(--white); }
-        h3 { font-size: 1.5rem; font-weight: 700; margin: 60px 0 25px; color: var(--secondary); }
-        .dark-section h3, .accent-section h3 { color: var(--white); }
-        h4 { font-size: 1.25rem; font-weight: 700; margin-bottom: 15px; color: var(--accent); }
-        p { margin-bottom: 28px; line-height: 1.9; }
-        .bold-statement { font-size: 1.4rem; font-weight: 700; text-align: center; margin: 60px 0; padding: 40px; background: var(--light); border-left: 5px solid var(--accent); color: var(--primary); line-height: 1.5; }
-        .dark-section .bold-statement { background: rgba(255,255,255,0.1); color: var(--white); }
-        .micro-headline { font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--accent); margin-bottom: 15px; }
-        .problem-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin: 60px 0; }
-        .problem-card { background: rgba(233, 69, 96, 0.1); padding: 40px; border-radius: 10px; border-left: 5px solid var(--accent); }
-        .problem-card h4 { color: var(--accent); margin-bottom: 15px; }
-        .steps { margin: 60px 0; }
-        .step { display: flex; gap: 30px; margin: 40px 0; padding: 40px; background: var(--white); border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.08); }
-        .step-number { flex-shrink: 0; width: 60px; height: 60px; background: var(--accent); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 900; }
-        .step-content h4 { margin-top: 0; }
-        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin: 60px 0; }
-        .feature { background: var(--white); padding: 40px; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.08); transition: transform 0.3s; }
-        .feature:hover { transform: translateY(-5px); }
-        .feature h4 { font-size: 1.2rem; margin-bottom: 15px; }
-        .wins-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 60px 0; }
-        .win { background: rgba(255,255,255,0.1); padding: 30px; border-radius: 10px; text-align: center; }
-        .win h4 { color: white; font-size: 1.1rem; }
-        .guarantee { background: var(--secondary); color: var(--white); padding: 80px 60px; border-radius: 10px; text-align: center; margin: 60px 0; }
-        .guarantee h3 { color: var(--accent); margin-top: 0; font-size: 2rem; }
-        .price-section { text-align: center; }
-        .price { font-size: clamp(3.5rem, 8vw, 5rem); font-weight: 900; color: var(--white); margin: 20px 0; line-height: 1; }
-        .price-note { font-size: 1.2rem; opacity: 0.9; margin-bottom: 40px; }
-        .faq-item { background: var(--white); padding: 40px; margin: 30px 0; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.08); }
-        .faq-item h4 { margin-bottom: 20px; }
-        footer { background: var(--primary); color: var(--white); text-align: center; padding: 60px 20px; }
-        .spacer { height: 60px; }
-        @media (max-width: 768px) { section { padding: 80px 20px; } .hero { padding: 100px 20px 80px; } .step { flex-direction: column; gap: 20px; } .guarantee { padding: 40px 30px; } }
+        
+        h2 { font-size: clamp(1.6rem, 4vw, 2.2rem); font-weight: 700; margin-bottom: 30px; line-height: 1.3; color: var(--primary); }
+        .dark-section h2 { color: var(--white); }
+        h3 { font-size: 1.3rem; font-weight: 700; margin: 40px 0 15px; color: var(--primary); }
+        .dark-section h3 { color: var(--white); }
+        h4 { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; color: var(--primary); }
+        .dark-section h4 { color: var(--white); }
+        p { margin-bottom: 18px; line-height: 1.7; }
+        
+        /* PROBLEM GRID */
+        .problem-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin: 30px 0; }
+        .problem-card { background: var(--white); padding: 25px; border-radius: 8px; border-left: 4px solid var(--primary); }
+        .problem-card h4 { margin-bottom: 10px; }
+        
+        /* STEPS */
+        .steps { margin: 30px 0; }
+        .step { display: flex; gap: 20px; margin: 25px 0; padding: 25px; background: var(--white); border-radius: 8px; }
+        .step-number { flex-shrink: 0; width: 45px; height: 45px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; font-weight: 700; }
+        .step-content h4 { margin-top: 0; margin-bottom: 8px; }
+        .step-content p { margin: 0; }
+        
+        /* FEATURE GRID */
+        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin: 30px 0; }
+        .feature { background: rgba(255,255,255,0.1); padding: 25px; border-radius: 8px; }
+        .feature h4 { color: white; margin-bottom: 10px; }
+        .feature p { color: rgba(255,255,255,0.85); margin: 0; font-size: 0.95rem; }
+        
+        /* WINS GRID */
+        .wins-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin: 30px 0; }
+        .win { background: rgba(255,255,255,0.1); padding: 20px; border-radius: 8px; }
+        .win h4 { color: white; font-size: 1rem; margin-bottom: 8px; }
+        .win p { color: rgba(255,255,255,0.8); font-size: 0.9rem; margin: 0; }
+        
+        /* FAQ */
+        .faq-item { background: var(--white); padding: 25px; margin: 15px 0; border-radius: 8px; }
+        .faq-item h4 { margin-bottom: 10px; }
+        .faq-item p { margin: 0; }
+        
+        /* PRICE */
+        .price { font-size: clamp(3rem, 7vw, 4.5rem); font-weight: 800; color: var(--white); margin: 15px 0; }
+        .price-note { font-size: 1.1rem; opacity: 0.9; margin-bottom: 30px; }
+        
+        /* BULLET LIST */
+        .bullet-list { margin-top: 30px; }
+        .bullet-list p { margin: 8px 0; opacity: 0.9; }
+        
+        /* FOOTER */
+        footer { background: var(--primary); color: var(--white); text-align: center; padding: 40px 20px; }
+        footer p { margin: 5px 0; opacity: 0.7; font-size: 0.9rem; }
+        
+        @media (max-width: 768px) { 
+            section { padding: 60px 20px; } 
+            .hero { padding: 80px 20px 60px; } 
+            .step { flex-direction: column; gap: 15px; } 
+        }
     </style>
 </head>
 <body>
 
 <section class="hero">
     <div class="container">
-        <p class="micro-headline">AI Implementation Sprint</p>
-        <h1>
-            <span class="pattern-interrupt">Stop Guessing About AI.</span>
-            Get One Real AI System Working In Your Business Fast.
-        </h1>
+        <h1>Stop Guessing About AI.<br>Get One Real AI System Working In Your Business Fast.</h1>
         <p class="hero-subtitle">If you know AI matters but you still haven't implemented anything useful, this sprint helps you identify the best first workflow, set it up, and get it working.</p>
         <p class="hero-outcome">Without drowning in tools, prompts, or confusion.</p>
         <a href="#offer" class="cta-button">Book Your Sprint — $1,500</a>
@@ -74,37 +98,33 @@
     </div>
 </section>
 
-<section class="light-section">
+<section class="content-section">
     <div class="container">
-        <p class="micro-headline">The Real Problem</p>
         <h2>Your Current Challenge</h2>
-        
         <p>Every day you wait, you're losing time, leads, and momentum. While other businesses are automating, you're still drowning in manual work.</p>
         
         <div class="problem-grid">
             <div class="problem-card">
-                <h4>😵 Overwhelmed by Tools</h4>
+                <h4>Overwhelmed by Tools</h4>
                 <p>Too many apps. Too many promises. No clear first move. You don't need another platform—you need one system that actually works.</p>
             </div>
             <div class="problem-card">
-                <h4>😤 No Implementation</h4>
+                <h4>No Implementation</h4>
                 <p>You know AI matters, but nothing useful is actually running in your business. You're still doing everything manually.</p>
             </div>
             <div class="problem-card">
-                <h4>💸 Lost Time + Leads</h4>
+                <h4>Lost Time + Leads</h4>
                 <p>Slow follow-up, admin drag, and inconsistent communication cost real money. Every delayed response is a lost opportunity.</p>
             </div>
         </div>
         
-        <p class="bold-statement">You don't need to become an AI expert. You need one working system that saves you time and makes you money.</p>
+        <p style="text-align: center; font-size: 1.2rem; font-weight: 600; margin-top: 40px; color: var(--primary);">You don't need to become an AI expert. You need one working system that saves you time and makes you money.</p>
     </div>
 </section>
 
-<section class="gray-section">
+<section class="alt-section">
     <div class="container">
-        <p class="micro-headline">The Solution</p>
         <h2>What This Sprint Does</h2>
-        
         <p>Instead of trying to automate everything at once, we install the best first system for the biggest bottleneck in your business.</p>
         
         <div class="steps">
@@ -142,84 +162,79 @@
 
 <section class="dark-section">
     <div class="container">
-        <p class="micro-headline">What's Included</p>
         <h2>Everything You Get</h2>
         
         <div class="feature-grid">
             <div class="feature">
-                <h4>📊 Business Bottleneck Audit</h4>
+                <h4>Business Bottleneck Audit</h4>
                 <p>Deep dive into where time, leads, and money are being lost in your current workflow.</p>
             </div>
             <div class="feature">
-                <h4>🎯 Best-First AI Recommendation</h4>
+                <h4>Best-First AI Recommendation</h4>
                 <p>Clear recommendation on the highest-leverage AI use case for your specific situation.</p>
             </div>
             <div class="feature">
-                <h4>⚙️ System Setup + Implementation</h4>
+                <h4>System Setup + Implementation</h4>
                 <p>We build and configure the system—not just tell you how, but actually do it.</p>
             </div>
             <div class="feature">
-                <h4>✅ Testing + Cleanup</h4>
+                <h4>Testing + Cleanup</h4>
                 <p>We test everything, refine it, and make sure it works in your real business environment.</p>
             </div>
             <div class="feature">
-                <h4>📋 Handoff + Simple SOP</h4>
+                <h4>Handoff + Simple SOP</h4>
                 <p>Clear documentation and walkthrough so you or your team can run it without confusion.</p>
             </div>
             <div class="feature">
-                <h4>🗺️ Next-Step AI Roadmap</h4>
+                <h4>Next-Step AI Roadmap</h4>
                 <p>Clear path forward for what to automate next, once this first system is working.</p>
             </div>
         </div>
     </div>
 </section>
 
-<section class="light-section">
+<section class="content-section">
     <div class="container">
-        <p class="micro-headline">Possible Wins</p>
         <h2>What We Could Build Together</h2>
-        
         <p>Every business is different. Here are some of the first systems we've implemented for other local businesses:</p>
         
         <div class="wins-grid">
-            <div class="win" style="background: var(--light); padding: 30px;">
-                <h4 style="color: var(--primary); margin-bottom: 10px;">Lead Follow-Up Automation</h4>
-                <p style="font-size: 0.95rem; color: #666; margin: 0;">Never let a lead go cold. Automated follow-up sequences that nurture prospects until they're ready to buy.</p>
+            <div class="win">
+                <h4>Lead Follow-Up Automation</h4>
+                <p>Never let a lead go cold. Automated sequences that nurture prospects.</p>
             </div>
-            <div class="win" style="background: var(--light); padding: 30px;">
-                <h4 style="color: var(--primary); margin-bottom: 10px;">Client Intake Flow</h4>
-                <p style="font-size: 0.95rem; color: #666; margin: 0;">Streamlined onboarding that collects all the info you need without endless back-and-forth emails.</p>
+            <div class="win">
+                <h4>Client Intake Flow</h4>
+                <p>Streamlined onboarding without endless back-and-forth emails.</p>
             </div>
-            <div class="win" style="background: var(--light); padding: 30px;">
-                <h4 style="color: var(--primary); margin-bottom: 10px;">FAQ / Response Automation</h4>
-                <p style="font-size: 0.95rem; color: #666; margin: 0;">Instant answers to common questions. Your customers get help 24/7 without you lifting a finger.</p>
+            <div class="win">
+                <h4>FAQ / Response Automation</h4>
+                <p>Instant answers to common questions, 24/7.</p>
             </div>
-            <div class="win" style="background: var(--light); padding: 30px;">
-                <h4 style="color: var(--primary); margin-bottom: 10px;">Appointment Handling</h4>
-                <p style="font-size: 0.95rem; color: #666; margin: 0;">Automated scheduling, reminders, and rescheduling. No more phone tag or missed appointments.</p>
+            <div class="win">
+                <h4>Appointment Handling</h4>
+                <p>Automated scheduling, reminders, and rescheduling.</p>
             </div>
-            <div class="win" style="background: var(--light); padding: 30px;">
-                <h4 style="color: var(--primary); margin-bottom: 10px;">Proposal Generation</h4>
-                <p style="font-size: 0.95rem; color: #666; margin: 0;">Professional proposals created in minutes, not hours. Consistent, branded, and ready to send.</p>
+            <div class="win">
+                <h4>Proposal Generation</h4>
+                <p>Professional proposals in minutes, not hours.</p>
             </div>
-            <div class="win" style="background: var(--light); padding: 30px;">
-                <h4 style="color: var(--primary); margin-bottom: 10px;">Review Request Systems</h4>
-                <p style="font-size: 0.95rem; color: #666; margin: 0;">Automated review requests that go out at the perfect time. Build your reputation on autopilot.</p>
+            <div class="win">
+                <h4>Review Request Systems</h4>
+                <p>Automated requests that go out at the perfect time.</p>
             </div>
         </div>
         
-        <p class="bold-statement">Most businesses don't need an AI empire. They need one useful system that saves time, improves response speed, or increases follow-through.</p>
+        <p style="text-align: center; font-size: 1.15rem; font-weight: 600; margin-top: 30px; color: var(--primary);">Most businesses don't need an AI empire. They need one useful system.</p>
     </div>
 </section>
 
-<section class="accent-section">
+<section class="alt-section">
     <div class="container">
-        <p class="micro-headline" style="color: rgba(255,255,255,0.8);">Why This Works</p>
-        <h2>The First Win Changes Everything</h2>
-        
+        <h2>Why This Works</h2>
         <p>That first working system creates proof, momentum, clarity, and confidence. Once you see AI actually working in your business, adding more becomes easy.</p>
         
-        <p class="bold-statement" style="background: rgba(255,255,255,0.2); color: white; border-left-color: white;">One practical system beats a hundred AI tools you never use.</p>
+        <p style="text-align: center; font-size: 1.2rem; font-weight: 600; margin: 30px 0; padding: 25px; background: var(--light); border-radius: 8px; color: var(--primary);">One practical system beats a hundred AI tools you never use.</p>
         
         <h3>Why Business Owners Say Yes</h3>
         
@@ -231,9 +246,8 @@
     </div>
 </section>
 
-<section class="light-section">
+<section class="content-section">
     <div class="container">
-        <p class="micro-headline">Common Questions</p>
         <h2>FAQ</h2>
         
         <div class="faq-item">
@@ -258,9 +272,8 @@
     </div>
 </section>
 
-<section class="dark-section price-section" id="offer">
-    <div class="container">
-        <p class="micro-headline">Investment</p>
+<section class="dark-section" id="offer">
+    <div class="container" style="text-align: center;">
         <h2>Ready to Stop Dabbling and Start Using AI?</h2>
         
         <p class="price">$1,500</p>
@@ -268,36 +281,32 @@
         
         <a href="#" class="cta-button">Book Your Sprint Now</a>
         
-        <div class="spacer"></div>
-        
-        <p style="opacity: 0.8; line-height: 2;">
-            ✅ Business bottleneck audit<br>
-            ✅ Best-first AI recommendation<br>
-            ✅ Complete system setup<br>
-            ✅ Testing & cleanup<br>
-            ✅ Simple handoff & SOP<br>
-            ✅ Next-step roadmap
-        </p>
+        <div class="bullet-list">
+            <p>✓ Business bottleneck audit</p>
+            <p>✓ Best-first AI recommendation</p>
+            <p>✓ Complete system setup</p>
+            <p>✓ Testing & cleanup</p>
+            <p>✓ Simple handoff & SOP</p>
+            <p>✓ Next-step roadmap</p>
+        </div>
     </div>
 </section>
 
-<section class="light-section">
-    <div class="container">
-        <div class="guarantee">
-            <h3>You Don't Need Another AI Course.</h3>
-            <p style="font-size: 1.4rem; margin: 30px 0;">You need one real system that works.</p>
-            <p>If you're tired of researching AI and ready to actually implement something useful, this sprint is for you.</p>
-            <p style="margin-top: 40px;">
-                <a href="#offer" class="cta-button">Get Started — $1,500</a>
-            </p>
-        </div>
+<section class="alt-section">
+    <div class="container" style="text-align: center;">
+        <h2>You Don't Need Another AI Course.</h2>
+        <p style="font-size: 1.3rem; font-weight: 600; margin: 20px 0;">You need one real system that works.</p>
+        <p>If you're tired of researching AI and ready to actually implement something useful, this sprint is for you.</p>
+        <p style="margin-top: 30px;">
+            <a href="#offer" class="cta-button" style="background: var(--primary); color: white;">Get Started — $1,500</a>
+        </p>
     </div>
 </section>
 
 <footer>
     <div class="container">
         <p>&copy; 2026 AI Setup Sprint. All rights reserved.</p>
-        <p style="margin-top: 10px; opacity: 0.7;">Built for local businesses ready to implement AI.</p>
+        <p>Built for local businesses ready to implement AI.</p>
     </div>
 </footer>
 
